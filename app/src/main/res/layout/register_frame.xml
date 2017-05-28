@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/register_button"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="31dp"
+            android:text="注册"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/username2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/pwd2"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="39dp"
+            android:ems="10"
+            android:hint="用户名" >
+
+            <requestFocus />
+        </EditText>
+
+        <EditText
+            android:id="@+id/pwd2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/username2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="密码"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/pwdconfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/pwd2"
+            android:layout_centerVertical="true"
+            android:ems="10"
+            android:hint="确认密码"
+            android:inputType="textPassword" />
+
+        <RadioGroup
+            android:id="@+id/sexradioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/pwdconfirm"
+            android:layout_below="@+id/username3" >
+
+            <RadioButton
+                android:id="@+id/radiomale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="男" />
+
+            <RadioButton
+                android:id="@+id/radiofemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="女" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/username3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/sexradioGroup"
+            android:layout_below="@+id/pwdconfirm"
+            android:layout_marginTop="22dp"
+            android:ems="10"
+            android:hint="出生日期" />
+
+        <Button
+            android:id="@+id/register_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/sexradioGroup"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="19dp"
+            android:layout_marginLeft="30dp"
+            android:hint="注册"
+            android:text="注册" />
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/register_button"
+            android:layout_alignRight="@+id/username3"
+            android:layout_marginRight="15dp"
+            android:text="清空" />
+
+    </RelativeLayout>
+</LinearLayout>
