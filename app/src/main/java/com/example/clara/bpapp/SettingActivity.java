@@ -18,6 +18,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private EditText birthText;
     private EditText deviceIDText;
     private Button saveButton;
+    private Button cancleButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -27,16 +29,18 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void initView() {
-        usernameText=(EditText) findViewById(R.id.username3);
-        userIDText=(EditText) findViewById(R.id.userID);
-        pwdText=(EditText) findViewById(R.id.pwd3);
+        usernameText=(EditText) findViewById(R.id.usernametext);
+        userIDText=(EditText) findViewById(R.id.userIDtext);
+        pwdText=(EditText) findViewById(R.id.pwdtext);
         sexGroup=(RadioGroup) findViewById(R.id.sexradioGroup);
         maleRadio=(RadioButton) findViewById(R.id.radiomale);
         femaleRadio=(RadioButton) findViewById(R.id.radiofemale);
         birthText=(EditText) findViewById(R.id.birthtext);
-        deviceIDText=(EditText) findViewById(R.id.devicetext);
+        deviceIDText=(EditText) findViewById(R.id.deviceIDtext);
         saveButton=(Button) findViewById(R.id.save_button);
         saveButton.setOnClickListener(this);
+        cancleButton=(Button) findViewById(R.id.cancel_button);
+
     }
 
     @Override

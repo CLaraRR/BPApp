@@ -28,7 +28,8 @@
             android:layout_below="@+id/pwd"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
-            android:text="登录" />
+            android:text="登录"
+            android:background="@color/PaleVioletRed"/>
 
         <EditText
             android:id="@+id/username"
@@ -47,17 +48,18 @@
             android:layout_alignParentRight="true"
             android:layout_below="@+id/login_button"
             android:layout_marginTop="39dp"
+            android:clickable="true"
             android:text="没有账号？注册一个" />
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/login_button"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="39dp"
+            android:layout_marginTop="36dp"
             android:text="登录"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 </LinearLayout>

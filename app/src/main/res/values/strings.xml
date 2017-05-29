@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">血压小助手</string>
+    <string name="save">保存</string>
 </resources>

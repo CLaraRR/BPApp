@@ -1,73 +1,239 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TableRow
-        android:id="@+id/tableRow1"
-        android:layout_height="wrap_content"
-        android:gravity="center" >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="用户名" />
+        android:orientation="vertical" >
 
-        <EditText
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
 
-            android:id="@+id/username3"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/cancel_button"
+                android:layout_width="65.83dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:text="取消"
+                android:textColor="#ffffff"
+                android:background="@color/PaleVioletRed"/>
 
-    </TableRow>
+            <TextView
+                android:id="@+id/tv_friend_title"
+                android:layout_width="wrap_content"
+                android:layout_height="50dip"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="设置"
+                android:textColor="#000000"
+                android:textSize="20dip" />
 
-    <TableRow
-        android:id="@+id/tableRow2"
-        android:layout_height="wrap_content"
-        android:gravity="center">
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="65.83dp"
+                android:layout_height="40dp"
+                android:layout_marginRight="10dp"
+                android:text="保存"
+                android:textColor="#ffffff"
+                android:background="@color/PaleVioletRed"/>
+        </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="密码" />
+        <RelativeLayout
+            android:id="@+id/editRel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
 
-        <EditText
+            <RelativeLayout
+                android:id="@+id/usernameRe"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:clickable="true"
+                android:gravity="center_vertical" >
 
-            android:id="@+id/pwd3"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"  />
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:textColor="#000"
+                    android:text="用户名"
+                    android:textSize="17sp" />
 
-    </TableRow>>
+                <EditText
+                    android:id="@+id/usernametext"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dip"
+                    android:layout_toRightOf="@id/username"
+                    android:background="@null"
+                    android:hint="用户名"
+                    android:textSize="15sp" />
+            </RelativeLayout>
 
-    <TableRow
-        android:id="@+id/tableRow3"
-        android:layout_height="wrap_content"
-        android:gravity="center">
+            <RelativeLayout
+                android:id="@+id/userIDRe"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/usernameRe"
+                android:clickable="true"
+                android:gravity="center_vertical" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="确认密码" />
+                <TextView
+                    android:id="@+id/userID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:textColor="#000"
+                    android:text="用户ID"
+                    android:textSize="17sp" />
 
-        <EditText
+                <EditText
+                    android:id="@+id/userIDtext"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dip"
+                    android:layout_toRightOf="@id/userID"
+                    android:background="@null"
+                    android:hint="用户ID"
+                    android:textSize="15sp" />
+            </RelativeLayout>
 
-            android:id="@+id/repassword"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword" />
+            <RelativeLayout
+                android:id="@+id/pwdRe"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/userIDRe"
+                android:clickable="true"
+                android:gravity="center_vertical" >
 
-    </TableRow>
+                <TextView
+                    android:id="@+id/pwd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:textColor="#000"
+                    android:text="密    码"
+                    android:textSize="17sp" />
 
-    <TableRow
-        android:id="@+id/tableRow4"
-        android:layout_height="wrap_content"
-        android:gravity="center" >
+                <EditText
+                    android:id="@+id/pwdtext"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dip"
+                    android:layout_toRightOf="@id/pwd"
+                    android:background="@null"
+                    android:hint="密    码"
+                    android:textSize="15sp" />
+            </RelativeLayout>
 
-        <Button
-            android:id="@+id/register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="注     册" />
+            <RelativeLayout
+                android:id="@+id/sexRe"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pwdRe"
+                android:clickable="true"
+                android:gravity="center_vertical" >
 
-    </TableRow>
-</TableLayout>
+                <TextView
+                    android:id="@+id/sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:textColor="#000"
+                    android:text="性    别"
+                    android:textSize="17sp" />
+                <RadioGroup
+                    android:id="@+id/sexradioGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dip"
+                    android:layout_toRightOf="@id/sex"
+                    android:background="@null" >
+
+                    <RadioButton
+                        android:id="@+id/radiomale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="男" />
+                    <RadioButton
+                        android:id="@+id/radiofemale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="女"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true" />
+
+                </RadioGroup>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/birthRe"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sexRe"
+                android:clickable="true"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/birth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:textColor="#000"
+                    android:text="出生日期"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/birthtext"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dip"
+                    android:layout_toRightOf="@id/birth"
+                    android:background="@null"
+                    android:hint="出生日期"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/deviceRe"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/birthRe"
+                android:clickable="true"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/deviceID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:textColor="#000"
+                    android:text="设备ID"
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/deviceIDtext"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dip"
+                    android:layout_toRightOf="@id/deviceID"
+                    android:background="@null"
+                    android:hint="设备ID"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>

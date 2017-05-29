@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginButton=(Button) findViewById(R.id.login_button);
         registerTV=(TextView) findViewById(R.id.register);
         loginButton.setOnClickListener(this);
+        registerTV.setClickable(true);
         registerTV.setOnClickListener(this);
     }
 

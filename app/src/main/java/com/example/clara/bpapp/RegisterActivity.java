@@ -21,7 +21,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private RadioButton maleRadio;
     private RadioButton femaleRadio;
     private Button registerButton;
-    private Button clearButton;
+    private Button cancleButton;
     private String sex;
 
     
@@ -33,15 +33,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void initView() {
-        usernameText=(EditText) findViewById(R.id.username2);
-        passwordText=(EditText) findViewById(R.id.pwd2);
-        confirmText=(EditText) findViewById(R.id.pwdconfirm);
-        birthText=(EditText) findViewById(R.id.username3);
+        usernameText=(EditText) findViewById(R.id.usernametext);
+        passwordText=(EditText) findViewById(R.id.pwdtext);
+        confirmText=(EditText) findViewById(R.id.pwdconfirmtext);
+        birthText=(EditText) findViewById(R.id.birthtext);
         sexRadio=(RadioGroup) findViewById(R.id.sexradioGroup);
         maleRadio=(RadioButton) findViewById(R.id.radiomale);
         femaleRadio=(RadioButton) findViewById(R.id.radiofemale);
         registerButton=(Button) findViewById(R.id.register_button);
-        clearButton=(Button) findViewById(R.id.save_button);
+        cancleButton=(Button) findViewById(R.id.cancel_button);
 
         sexRadio.setOnCheckedChangeListener(this);
     }
