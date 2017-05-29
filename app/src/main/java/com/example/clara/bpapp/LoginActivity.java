@@ -43,9 +43,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
 
-                //跳转到首页
+                //登陆成功跳转到首页
                 Intent intent=new Intent(LoginActivity.this,MainActivity.class);
                 startActivity(intent);
+                //登陆不成功留在本页面
                 break;
             case R.id.register:
                 //跳转到注册页面

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:text="连接服务器"
+            android:textSize="30sp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:id="@+id/iptext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="134dp"
+            android:ems="10"
+            android:hint="IP地址" />
+        <EditText
+            android:id="@+id/porttext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="端口号"
+            android:inputType="textPassword"
+            android:layout_below="@+id/iptext"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="43dp">
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/connect_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/porttext"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="连接"
+            android:background="@color/PaleVioletRed"/>
+
+
+
+
+
+
+    </RelativeLayout>
+</LinearLayout>

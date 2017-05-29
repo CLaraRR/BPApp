@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
@@ -34,16 +35,21 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
     private ArrayAdapter<String> arr_adapter;
     private LineChartView lineChart;
     private ListView listView;
+    private LinearLayout linearLayoutRoot;
 
-    String[] date = {"10-22","11-22","12-22","1-22","6-22","5-23","5-22","6-22","5-23","5-22"};//X轴的标注
-    int[] score= {50,42,90,33,10,74,22,18,79,20};//图表的数据点
+    String[] date =null;
+    int[] highpressure_score=null;
+    int[] lowpressure_score=null;
+    int[] heartbeat_score=null;
     private List<PointValue> mPointValues = new ArrayList<PointValue>();
     private List<AxisValue> mAxisXValues = new ArrayList<AxisValue>();
 
 
-    String[] from={"date","score"};              //这里是ListView显示内容每一列的列名
-    int[] to={R.id.date,R.id.score};   //这里是ListView显示每一列对应的list_item中控件的id
-    String[] scoreStr={"50","42","90","33","10","74","22","18","79","20"};
+    String[] from={"date","highpressure_score","lowpressure_score","heartbeat_score"};              //这里是ListView显示内容每一列的列名
+    int[] to={R.id.date,R.id.highpressure_score,R.id.lowpressure_score,R.id.heartbeat_score};   //这里是ListView显示每一列对应的list_item中控件的id
+    String[] highpressure_scoreStr=null;
+    String[] lowpressure_scoreStr=null;
+    String[] heartbeat_scoreStr=null;
     ArrayList<HashMap<String,String>> list=null;
     HashMap<String,String> map=null;
 
@@ -55,9 +61,45 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
 //        textview.setText("这是首页");
 //        setContentView(textview);
         setContentView(R.layout.index_frame);
+        linearLayoutRoot=(LinearLayout) findViewById(R.id.linearlayoutroot);
+        lineChart = (LineChartView)findViewById(R.id.line_chart);
+        initData();
         initSpinner();
-        initChart();
+        initChart(0);
         initDataList();
+
+
+    }
+
+    /**
+     * 初始化页面数据
+     */
+    private void initData() {
+        String[] date2={"10-22","11-22","12-22","1-22","6-22","5-23","5-22","6-22","5-23","5-22"};
+        int[] highpressure_score2={50,42,90,33,10,74,22,18,79,20};
+        int[] lowpressure_score2={40,32,80,23,5,64,12,5,50,12};
+        int[] heartbeat_score3={100,80,85,70,70,74,75,80,85,80};
+        int datalen=date2.length;
+        date=new String[datalen];
+        highpressure_score=new int[datalen];
+        lowpressure_score=new int[datalen];
+        heartbeat_score=new int[datalen];
+        highpressure_scoreStr=new String[datalen];
+        lowpressure_scoreStr=new String[datalen];
+        heartbeat_scoreStr=new String[datalen];
+        
+        date = date2;//X轴的标注
+        highpressure_score= highpressure_score2;//高血压数据点
+        lowpressure_score= lowpressure_score2;//低血压数据点
+        heartbeat_score= heartbeat_score3;//心率数据点
+
+        for(int i=0;i<date.length;i++){
+            highpressure_scoreStr[i]=String.valueOf(highpressure_score[i]);
+            lowpressure_scoreStr[i]=String.valueOf(lowpressure_score[i]);
+            heartbeat_scoreStr[i]=String.valueOf(heartbeat_score[i]);
+        }
+        
+
 
 
     }
@@ -76,7 +118,9 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
         for(int i=0; i<date.length; i++){
             map=new HashMap<String,String>();       //为避免产生空指针异常，有几列就创建几个map对象
             map.put("date", date[i]);
-            map.put("score", scoreStr[i]);
+            map.put("highpressure_score", highpressure_scoreStr[i]);
+            map.put("lowpressure_score", lowpressure_scoreStr[i]);
+            map.put("heartbeat_score", heartbeat_scoreStr[i]);
             list.add(map);
         }
         //创建一个SimpleAdapter对象
@@ -88,11 +132,13 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
     /**
      * 初始化图表
      */
-    private void initChart() {
-        lineChart = (LineChartView)findViewById(R.id.line_chart);
+    private void initChart(int type) {
+
+        lineChart=(LineChartView) findViewById(R.id.line_chart);
+        
         getAxisXLables();//获取x轴的标注
-        getAxisPoints();//获取坐标点
-        initLineChart();//初始化折线图
+        getAxisPoints(type);//获取坐标点
+        initLineChart(type);//初始化折线图
     }
 
     /**
@@ -102,9 +148,9 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
         spinner = (Spinner) findViewById(R.id.spinner);
         //数据
         data_list = new ArrayList<String>();
-        data_list.add("近一周");
-        data_list.add("近两周");
-        data_list.add("近一个月");
+        data_list.add("高血压");
+        data_list.add("低血压");
+        data_list.add("心率");
 
         //适配器
         arr_adapter= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_list);
@@ -129,22 +175,25 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch(position){
-            //近一周
+            //高血压
             case 0:
-                //调用方法去获取数据
-
-                //更新data和score数组
-
                 //更新图表
-                //initChart();
+//                linearLayoutRoot.removeViewAt(1);
+//                initChart(0);
                 break;
-            //近两周
+            //低血压
             case 1:
-
+                //更新图表
+               // linearLayoutRoot.removeViewAt(1);
+                initChart(1);
+               // linearLayoutRoot.addView(lineChart,1);
                 break;
-            //近一个月
+            //心率
             case 2:
-
+                //更新图表
+               // linearLayoutRoot.removeViewAt(1);
+                initChart(2);
+               // linearLayoutRoot.addView(lineChart,1);
                 break;
 
         }
@@ -170,11 +219,32 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
     /**
      * 图表每个点的显示
      */
-    private void getAxisPoints() {
+    private void getAxisPoints(int type) {
         // TODO Auto-generated method stub
-        for (int i = 0; i < score.length; i++) {
-            mPointValues.add(new PointValue(i, score[i]));
+        switch(type){
+            case 0:
+                for (int i = 0; i < highpressure_score.length; i++) {
+                    mPointValues.add(new PointValue(i, highpressure_score[i]));
+                }
+                break;
+            case 1:
+                for (int i = 0; i < lowpressure_score.length; i++) {
+                    mPointValues.add(new PointValue(i, lowpressure_score[i]));
+                }
+                break;
+            case 2:
+                for (int i = 0; i < heartbeat_score.length; i++) {
+                    mPointValues.add(new PointValue(i, heartbeat_score[i]));
+                }
+                break;
+            default:
+                for (int i = 0; i < highpressure_score.length; i++) {
+                    mPointValues.add(new PointValue(i, highpressure_score[i]));
+                }
+                break;
+
         }
+
     }
 
 
@@ -182,8 +252,9 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
     /**
      * 初始化折线图的显示
      */
-    private void initLineChart() {
+    private void initLineChart(int type) {
         // TODO Auto-generated method stub
+        lineChart=(LineChartView) findViewById(R.id.line_chart);
         Line line = new Line(mPointValues).setColor(Color.parseColor("#DB7093"));  //折线的颜色（橙色）
         List<Line> lines = new ArrayList<Line>();
         line.setShape(ValueShape.CIRCLE);//折线图上每个数据点的形状  这里是圆形 （有三种 ：ValueShape.SQUARE  ValueShape.CIRCLE  ValueShape.DIAMOND）
@@ -211,7 +282,13 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
 
         // Y轴是根据数据的大小自动设置Y轴上限(在下面我会给出固定Y轴数据个数的解决方案)
         Axis axisY = new Axis();  //Y轴
-        axisY.setName("血压值");//y轴标注
+        if(type==0){
+            axisY.setName("高血压值");//y轴标注
+        }else if(type==1){
+            axisY.setName("低血压值");//y轴标注
+        }else if(type==2){
+            axisY.setName("心率值");//y轴标注
+        }
         axisY.setTextSize(10);//设置字体大小
         axisY.setTextColor(Color.BLACK);  //设置字体颜色
         data.setAxisYLeft(axisY);  //Y轴设置在左边
@@ -230,7 +307,7 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
          */
         Viewport v = new Viewport(lineChart.getMaximumViewport());
         v.left = 0;
-        v.right= 7;
+        v.right= 10;
         lineChart.setCurrentViewport(v);
     }
 
