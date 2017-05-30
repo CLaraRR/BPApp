@@ -1,12 +1,18 @@
 package com.example.clara.bpapp;
 
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.clara.net.ClientService;
+
+import static java.lang.Boolean.TRUE;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText usernameText;
@@ -19,7 +25,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.login_frame);
         initView();
     }
-
+    private Handler mHandler = new Handler() {
+        public void handleMessage (Message msg) {//此方法在ui线程运行  
+            String str=msg.obj.toString();
+            if(str.startsWith("+OKLOGIN")){
+                //登陆成功跳转到首页
+                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+//                intent.putExtra();
+                startActivity(intent);
+                
+            }else{
+                //登陆不成功留在本页面
+            }
+        }
+    };
     private void initView() {
 
         usernameText=(EditText) findViewById(R.id.username);
@@ -36,17 +55,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.login_button:
-                //验证用户
+                //用户登陆
                 String username=usernameText.getText().toString();
                 String pwd=pwdText.getText().toString();
-                //add your code here
+                doLogin(username,pwd);
+                
 
 
-
-                //登陆成功跳转到首页
-                Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                startActivity(intent);
-                //登陆不成功留在本页面
+                
                 break;
             case R.id.register:
                 //跳转到注册页面
@@ -54,5 +70,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(intent2);
                 break;
         }
+    }
+
+    private void doLogin(final String username, final String pwd) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String head="LH";
+                String tail="LT";
+                String loginMsg=head+" "+username+" "+pwd+" "+tail;
+                ClientService clientService=ClientService.getInstance();
+                String state=clientService.send(loginMsg);
+                Message msg=new Message();
+                msg.obj=state;
+                mHandler.sendMessage(msg);
+            }
+        }).start();
     }
 }
