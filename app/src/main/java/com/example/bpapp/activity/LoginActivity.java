@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.bpapp.bpapp.R;
-import com.example.bpapp.net.ClientService;
+import com.example.bpapp.service.ClientService;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText usernameText;
@@ -27,7 +27,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Handler mHandler = new Handler() {
         public void handleMessage (Message msg) {//此方法在ui线程运行  
             String str=msg.obj.toString();
-            if(str.startsWith("+OKLOGIN")){
+            System.out.println(str); 
+            if(str.startsWith("+OK LOGIN")){
                 //登陆成功跳转到首页
                 Intent intent=new Intent(LoginActivity.this,MainActivity.class);
 //                intent.putExtra();
@@ -78,10 +79,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String head="LH";
                 String tail="LT";
                 String loginMsg=head+" "+username+" "+pwd+" "+tail;
-                ClientService clientService=ClientService.getInstance();
-                String state=clientService.send(loginMsg);
+                ClientService clientService= ClientService.getInstance();
+                String backMessage=clientService.send(loginMsg);
                 Message msg=new Message();
-                msg.obj=state;
+                msg.obj=backMessage;
                 mHandler.sendMessage(msg);
             }
         }).start();

@@ -1,4 +1,4 @@
-package com.example.bpapp.net;
+package com.example.bpapp.service;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

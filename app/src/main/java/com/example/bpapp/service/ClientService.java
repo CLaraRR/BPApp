@@ -1,4 +1,4 @@
-package com.example.bpapp.net;
+package com.example.bpapp.service;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -22,17 +22,17 @@ public class ClientService {
     SocketChannel socketChannel;
     Iterator<SelectionKey> keyIterator;
     
-    private static ClientService instance;
+    private static  ClientService instance;
 
 
-    public  ClientService(String address, int port) {
+    public ClientService(String address, int port) {
         super();
         this.address = address;
         this.port = port;
     }
 
 
-    private ClientService() {
+    public ClientService() {
         super();
     }
     
@@ -45,9 +45,21 @@ public class ClientService {
         
     }
 
+    public void setAddress(String address){
+        this.address=address;
+    }
+    public String getAddress(){
+        return this.address;
+    }
+    public void setPort(int port){
+        this.port=port;
+    }
+    public int getPort(){
+        return this.port;
+    }
 
-    public boolean start(String address, int port) throws IOException {
-        socketChannel=ClientSocketChannel.getSocketChannel(address, port);
+    public boolean start() throws IOException {
+        socketChannel= ClientSocketChannel.getSocketChannel(address, port);
         selector = Selector.open();
         // 注册连接服务器socket的动作
         socketChannel.register(selector, SelectionKey.OP_CONNECT);
@@ -56,8 +68,7 @@ public class ClientService {
         selector.select();
         // 返回此选择器的已选择键集。
         keyIterator = selector.selectedKeys().iterator();
-        if(keyIterator.hasNext())
-        {
+        if(keyIterator.hasNext()) {
             key = keyIterator.next();
             keyIterator.remove();
         }
@@ -78,7 +89,7 @@ public class ClientService {
 
         if(socketChannel==null){
             try {
-                start("localhost", 8000);
+                start();
             } catch (IOException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();

@@ -1,4 +1,6 @@
-package com.example.bpapp.net;
+package com.example.bpapp.service;
+
+import com.example.bpapp.service.ClientService;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -17,10 +19,11 @@ public class test {
         String[] split=line.split(" ");
         String IP=split[0];
         String port=split[1];
-
-        ClientService clientService=new ClientService(IP,Integer.parseInt(port));
+        ClientService clientService=ClientService.getInstance();
+        clientService.setAddress(IP);
+        clientService.setPort(Integer.parseInt(port));
         try {
-            boolean isConnect=clientService.start(IP,Integer.parseInt(port));
+            boolean isConnect=clientService.start();
             if(isConnect){
                 System.out.println("connect success");
             }else{
@@ -30,10 +33,19 @@ public class test {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        System.out.println("please enter data:");
+        System.out.println("###please enter data:");
+
+
         String data=in.nextLine();
         String message=clientService.send(data);//发送的数据（按照协议来封装数据），返回结果
         System.out.println(message);
-        //System.out.println(clientService.send("LH 123 23"));
+
+        System.out.println("$$$please enter data:");
+
+
+        data=in.nextLine();
+        message=ClientService.getInstance().send(data);//发送的数据（按照协议来封装数据），返回结果
+        System.out.println(message);
+
     }
 }

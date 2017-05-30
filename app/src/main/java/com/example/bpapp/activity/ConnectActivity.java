@@ -1,5 +1,6 @@
 package com.example.bpapp.activity;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -12,7 +13,7 @@ import android.widget.EditText;
 //import com.example.clara.net.ClientService;
 
 import com.example.bpapp.bpapp.R;
-import com.example.bpapp.net.ClientService;
+import com.example.bpapp.service.ClientService;
 
 import java.io.IOException;
 
@@ -41,7 +42,6 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
                 Intent intent=new Intent(ConnectActivity.this,LoginActivity.class);
                 startActivity(intent);
             }else{
-                
             }
         }
     };
@@ -73,10 +73,12 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
         new Thread(new Runnable() {
             @Override
             public void run() {
-//                ClientService clientService=ClientService.
-                ClientService clientService=new ClientService(ip,port);
+                ClientService clientService= ClientService.getInstance();
+                clientService.setAddress(ip);
+                clientService.setPort(port);
+
                 try {
-                    Boolean isConnect = clientService.start(ip,port);
+                    Boolean isConnect = clientService.start();
                     Message msg=new Message();
                     msg.obj=isConnect;
                     mHandler.sendMessage(msg);
