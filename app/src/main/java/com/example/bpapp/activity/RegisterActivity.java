@@ -1,4 +1,4 @@
-package com.example.clara.bpapp;
+package com.example.bpapp.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import com.example.bpapp.bpapp.R;
 
 /**
  * Created by 宁润 on 2017/5/28.

@@ -1,6 +1,5 @@
-package com.example.clara.bpapp;
+package com.example.bpapp.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -12,7 +11,8 @@ import android.widget.EditText;
 
 //import com.example.clara.net.ClientService;
 
-import com.example.clara.net.ClientService;
+import com.example.bpapp.bpapp.R;
+import com.example.bpapp.net.ClientService;
 
 import java.io.IOException;
 

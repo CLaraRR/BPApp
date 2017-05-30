@@ -1,4 +1,4 @@
-package com.example.clara.adapter;
+package com.example.bpapp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,8 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 
-import com.example.clara.bpapp.R;
-import com.example.clara.entity.Friends;
+import com.example.bpapp.bpapp.R;
+import com.example.bpapp.entity.Friends;
 
 import java.util.List;
 

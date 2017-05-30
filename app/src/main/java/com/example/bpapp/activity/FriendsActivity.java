@@ -1,4 +1,4 @@
-package com.example.clara.bpapp;
+package com.example.bpapp.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +8,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 
-import com.example.clara.adapter.FriendsAdapter;
-import com.example.clara.entity.Friends;
+import com.example.bpapp.adapter.FriendsAdapter;
+import com.example.bpapp.bpapp.R;
+import com.example.bpapp.entity.Friends;
 
 import java.util.ArrayList;
 import java.util.List;

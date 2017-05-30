@@ -1,4 +1,4 @@
-package com.example.clara.entity;
+package com.example.bpapp.entity;
 
 /**
  * Created by chenq on 2017/5/30.

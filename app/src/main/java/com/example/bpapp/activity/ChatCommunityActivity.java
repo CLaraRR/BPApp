@@ -1,4 +1,4 @@
-package com.example.clara.bpapp;
+package com.example.bpapp.activity;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +10,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 
-import com.example.clara.adapter.MsgAdapter;
-import com.example.clara.entity.Msg;
+import com.example.bpapp.adapter.MsgAdapter;
+import com.example.bpapp.bpapp.R;
+import com.example.bpapp.entity.Msg;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.clara.net;
+package com.example.bpapp.net;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

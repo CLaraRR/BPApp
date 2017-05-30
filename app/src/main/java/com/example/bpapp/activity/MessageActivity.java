@@ -1,4 +1,4 @@
-package com.example.clara.bpapp;
+package com.example.bpapp.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -9,8 +9,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.clara.adapter.ContactsAdapter;
-import com.example.clara.entity.Contacts;
+import com.example.bpapp.adapter.ContactsAdapter;
+import com.example.bpapp.bpapp.R;
+import com.example.bpapp.entity.Contacts;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

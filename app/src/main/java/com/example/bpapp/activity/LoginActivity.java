@@ -1,4 +1,4 @@
-package com.example.clara.bpapp;
+package com.example.bpapp.activity;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -10,9 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.clara.net.ClientService;
-
-import static java.lang.Boolean.TRUE;
+import com.example.bpapp.bpapp.R;
+import com.example.bpapp.net.ClientService;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText usernameText;

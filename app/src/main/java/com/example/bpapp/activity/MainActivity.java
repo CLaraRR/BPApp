@@ -1,4 +1,4 @@
-package com.example.clara.bpapp;
+package com.example.bpapp.activity;
 
 
 import android.app.TabActivity;
@@ -7,6 +7,8 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
+
+import com.example.bpapp.bpapp.R;
 
 public class MainActivity extends TabActivity {
 

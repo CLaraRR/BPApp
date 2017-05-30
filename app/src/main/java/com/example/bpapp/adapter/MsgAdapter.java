@@ -1,7 +1,6 @@
-package com.example.clara.adapter;
+package com.example.bpapp.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
-import com.example.clara.bpapp.R;
-import com.example.clara.entity.Msg;
+import com.example.bpapp.bpapp.R;
+import com.example.bpapp.entity.Msg;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.clara.bpapp">
+    package="com.example.bpapp.bpapp">
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <application
         android:allowBackup="true"
@@ -11,7 +11,7 @@
 
         <!-- android:theme="@style/AppTheme" -->
         <activity
-            android:name=".ConnectActivity"
+            android:name="com.example.bpapp.activity.ConnectActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +21,7 @@
         </activity>
 
         <activity
-            android:name=".LoginActivity"
+            android:name="com.example.bpapp.activity.LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegisterActivity"
+            android:name="com.example.bpapp.activity.RegisterActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +38,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.example.bpapp.activity.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,7 +47,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".IndexActivity"
+            android:name="com.example.bpapp.activity.IndexActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,7 +55,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MessageActivity"
+            android:name="com.example.bpapp.activity.MessageActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -63,16 +63,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SettingActivity"
+            android:name="com.example.bpapp.activity.SettingActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             </intent-filter>
         </activity>
-        <activity android:name=".AddContactsActivity" />
-        <activity android:name=".ChatCommunityActivity" />
-        <activity android:name=".FriendsActivity"></activity>
+        <activity android:name="com.example.bpapp.activity.AddContactsActivity" />
+        <activity android:name="com.example.bpapp.activity.ChatCommunityActivity" />
+        <activity android:name="com.example.bpapp.activity.FriendsActivity"></activity>
     </application>
 
 </manifest>

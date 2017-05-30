@@ -1,4 +1,4 @@
-package com.example.clara.bpapp;
+package com.example.bpapp.bpapp;
 
 import org.junit.Test;
 

@@ -1,6 +1,5 @@
-package com.example.clara.bpapp;
+package com.example.bpapp.activity;
 
-import android.app.ListActivity;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
-import android.widget.TextView;
+
+import com.example.bpapp.bpapp.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
