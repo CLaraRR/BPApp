@@ -11,8 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:left_btn_visible="true"
-        app:left_btn_src="@drawable/back"
         app:title_visible="true"
         app:title_text="首页"
         tools:context=".IndexActivity">

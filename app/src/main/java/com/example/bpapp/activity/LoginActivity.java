@@ -18,6 +18,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText pwdText;
     private Button loginButton;
     private TextView registerTV;
+    private Button gobackButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +45,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         usernameText=(EditText) findViewById(R.id.username);
         pwdText=(EditText) findViewById(R.id.pwd);
         loginButton=(Button) findViewById(R.id.login_button);
+        gobackButton=(Button) findViewById(R.id.toolbar_left_btn);
         registerTV=(TextView) findViewById(R.id.register);
         loginButton.setOnClickListener(this);
         registerTV.setClickable(true);
         registerTV.setOnClickListener(this);
+        gobackButton.setOnClickListener(this);
     }
 
 
@@ -68,6 +71,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 //跳转到注册页面
                 Intent intent2=new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(intent2);
+                break;
+            case R.id.toolbar_left_btn:
+                finish();
                 break;
         }
     }

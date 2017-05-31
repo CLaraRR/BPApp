@@ -33,7 +33,6 @@ public class MessageActivity extends AppCompatActivity {
 
         setContentView(R.layout.message_frame);
 
-
         button_addContatcs=(Button)findViewById(R.id.toolbar_right_btn2);
         button_addMessage=(Button)findViewById(R.id.toolbar_right_btn);
 

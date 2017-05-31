@@ -26,6 +26,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Button cancleButton;
     private String sex;
 
+    private Button gobackButton;
+
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         femaleRadio=(RadioButton) findViewById(R.id.radiofemale);
         registerButton=(Button) findViewById(R.id.register_button);
         cancleButton=(Button) findViewById(R.id.cancel_button);
-
+        gobackButton=(Button) findViewById(R.id.toolbar_left_btn);
+        registerButton.setOnClickListener(this);
+        cancleButton.setOnClickListener(this);
+        gobackButton.setOnClickListener(this);
         sexRadio.setOnCheckedChangeListener(this);
     }
 
@@ -78,6 +83,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 birthText.setText("");
                 maleRadio.setSelected(true);
 
+                break;
+            case R.id.toolbar_left_btn:
+                finish();
                 break;
         }
     }

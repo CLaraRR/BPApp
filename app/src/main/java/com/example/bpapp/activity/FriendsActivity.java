@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 
@@ -18,11 +19,18 @@ import java.util.List;
 public class FriendsActivity extends AppCompatActivity {
     private List<Friends> friendsList=new ArrayList<Friends>();
     private ListView listView;
-
+    private Button gobackButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.friends_frame);
+        gobackButton=(Button)findViewById(R.id.toolbar_left_btn);
+        gobackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         initFriends(20);
 
         FriendsAdapter friendsAdapter=new FriendsAdapter(FriendsActivity.this,R.layout.layout_friends,friendsList);

@@ -42,7 +42,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         saveButton=(Button) findViewById(R.id.save_button);
         saveButton.setOnClickListener(this);
         cancleButton=(Button) findViewById(R.id.cancel_button);
-
+        cancleButton.setOnClickListener(this);
     }
 
     @Override
@@ -52,6 +52,12 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 //保存动作。。
 
 
+                break;
+            case R.id.cancel_button:
+                finish();
+                break;
+            case R.id.toolbar_left_btn:
+                finish();
                 break;
         }
     }

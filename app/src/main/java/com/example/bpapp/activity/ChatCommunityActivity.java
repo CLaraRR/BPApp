@@ -23,6 +23,7 @@ public class ChatCommunityActivity extends AppCompatActivity {
     private Button send;
     private ListView msgListView;
     private MsgAdapter adapter;
+    private Button gobackButton;
 
     private List<Msg> msgList = new ArrayList<Msg>();
 
@@ -34,7 +35,13 @@ public class ChatCommunityActivity extends AppCompatActivity {
 //        actionBar.hide();
 
         setContentView(R.layout.chatcommunity_frame);
-
+        gobackButton=(Button)findViewById(R.id.toolbar_left_btn);
+        gobackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         initMsgs();
         adapter = new MsgAdapter(ChatCommunityActivity.this, R.layout.layout_msg, msgList);
 

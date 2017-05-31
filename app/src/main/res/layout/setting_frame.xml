@@ -10,8 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        app:left_btn_visible="true"
-        app:left_btn_src="@drawable/back"
         app:title_visible="true"
         app:title_text="设置"
         tools:context=".SettingActivity">
@@ -223,7 +221,7 @@
                 <Button
                     android:id="@+id/cancel_button"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="50dp"
                     android:text="取消"
                     android:textColor="#ffffff"
@@ -233,9 +231,8 @@
                 <Button
                     android:id="@+id/save_button"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="100dp"
-                    android:layout_marginRight="50dp"
                     android:layout_toRightOf="@id/cancel_button"
                     android:text="保存"
                     android:textColor="#ffffff"
