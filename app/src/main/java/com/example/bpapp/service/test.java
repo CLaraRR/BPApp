@@ -10,7 +10,7 @@ import java.util.Scanner;
  * @version 1.0
  * @date 2017/5/30
  */
-public class test {
+public class Test {
 //    static ClientService clientService=new ClientService("localhost",8000);//服务器的IP地址和端口号
     public static void main(String[] args) {
         System.out.println("please enter IP and port:");

@@ -71,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
 
                 break;
-            case R.id.save_button:
+            case R.id.cancel_button:
                 usernameText.setText("");
                 passwordText.setText("");
                 confirmText.setText("");

@@ -34,8 +34,8 @@ public class MessageActivity extends AppCompatActivity {
         setContentView(R.layout.message_frame);
 
 
-        button_addContatcs=(Button)findViewById(R.id.button_addContacts);
-        button_addMessage=(Button)findViewById(R.id.button_addMessage);
+        button_addContatcs=(Button)findViewById(R.id.toolbar_right_btn2);
+        button_addMessage=(Button)findViewById(R.id.toolbar_right_btn);
 
         initContacts(20);
         ContactsAdapter contactsAdapter=new ContactsAdapter(MessageActivity.this,R.layout.layout_contacts,contactsList);
