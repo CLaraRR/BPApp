@@ -2,6 +2,7 @@ package com.example.bpapp.activity;
 
 import android.content.Intent;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,51 +11,40 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
-
-import com.example.bpapp.adapter.FriendsAdapter;
+import com.example.bpapp.adapter.ContactsAdapter;
 import com.example.bpapp.bpapp.R;
-import com.example.bpapp.entity.Friends;
+import com.example.bpapp.entity.Contacts;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+
 /**
- * 好友消息Activity
+ * 社区消息页面Activity
  */
-public class MessageActivity extends AppCompatActivity  implements SwipeRefreshLayout.OnRefreshListener{
-    private List<Friends> friendsList=new ArrayList<Friends>();
+public class SocialActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
+    private List<Contacts> contactsList=new ArrayList<>();
     private ListView listView;
-    private Button gobackButton;
-    private Button addContactsButton;
+    private FloatingActionButton fab;
     private SwipeRefreshLayout swipeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.message_frame);
+        setContentView(R.layout.social_frame);
         swipeLayout = (SwipeRefreshLayout) findViewById(R.id.id_swipe_ly);
         swipeLayout.setOnRefreshListener(this);
-        gobackButton=(Button)findViewById(R.id.toolbar_left_btn);
-        gobackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        addContactsButton=(Button)findViewById(R.id.toolbar_right_btn2);
-        addContactsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(MessageActivity.this,AddContactsActivity.class);
-//                intent.putExtra();
-                startActivity(intent);
-            }
-        });
-        initFriends(20);
 
-        FriendsAdapter friendsAdapter=new FriendsAdapter(MessageActivity.this,R.layout.layout_friends,friendsList);
-        listView=(ListView)findViewById(R.id.listView_friends);
+        initContacts(20);
+        ContactsAdapter contactsAdapter=new ContactsAdapter(SocialActivity.this,R.layout.layout_contacts,contactsList);
+
+        listView=(ListView) findViewById(R.id.list_view);
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -69,15 +59,28 @@ public class MessageActivity extends AppCompatActivity  implements SwipeRefreshL
                     swipeLayout.setEnabled(false);
             }
         });
-        listView.setAdapter(friendsAdapter);
+        listView.setAdapter(contactsAdapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent inten=new Intent(MessageActivity.this,ChatCommunityActivity.class);
-                startActivity(inten);
+                Contacts contacts=contactsList.get(position);
+                Toast.makeText(SocialActivity.this,contacts.getName(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        fab=(FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(SocialActivity.this,EditSocialMsgActivity.class);
+//                intent.putExtra();
+                startActivity(intent);
+            }
+        });
+
+
 
     }
 
@@ -98,12 +101,14 @@ public class MessageActivity extends AppCompatActivity  implements SwipeRefreshL
             }
         }
     };
-    private void initFriends(int n){
-        for(int i=0;i<n;i++){
-            Friends friends=new Friends("Matthow");
-            friendsList.add(friends);
-        }
+    private void initContacts(int n){
+        for (int i=0;i<n;i++){
+            Date date=new Date();
+            DateFormat formater=new SimpleDateFormat("yyyy-MM-dd HH:MM");
 
+            Contacts contacts=new Contacts("Danel","Hello,Marry",formater.format(date).toString(),R.drawable.touxiang);
+            contactsList.add(contacts);
+        }
     }
 
     @Override

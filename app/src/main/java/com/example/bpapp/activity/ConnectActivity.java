@@ -19,6 +19,11 @@ import java.io.IOException;
 
 import static java.lang.Boolean.*;
 
+
+/**
+ * 连接服务器Activity
+ * Created by 宁润 on 2017/5/28.
+ */
 public class ConnectActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText iptext;

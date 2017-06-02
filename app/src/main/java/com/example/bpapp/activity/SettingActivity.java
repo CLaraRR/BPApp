@@ -10,6 +10,10 @@ import android.widget.RadioGroup;
 
 import com.example.bpapp.bpapp.R;
 
+/**
+ * 设置Activity
+ * Created by 宁润 on 2017/5/28.
+ */
 public class SettingActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText usernameText;
     private EditText userIDText;
@@ -21,6 +25,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private EditText deviceIDText;
     private Button saveButton;
     private Button cancleButton;
+    private Button gobackButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         saveButton.setOnClickListener(this);
         cancleButton=(Button) findViewById(R.id.cancel_button);
         cancleButton.setOnClickListener(this);
+        gobackButton=(Button) findViewById(R.id.toolbar_left_btn);
+        gobackButton.setOnClickListener(this);
     }
 
     @Override
@@ -59,6 +66,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.toolbar_left_btn:
                 finish();
                 break;
+
         }
     }
 }

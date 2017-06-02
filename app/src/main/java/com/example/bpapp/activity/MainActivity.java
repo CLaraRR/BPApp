@@ -10,6 +10,11 @@ import android.widget.TabHost.TabSpec;
 
 import com.example.bpapp.bpapp.R;
 
+
+/**
+ * 主页面Activity
+ * Created by 宁润 on 2017/5/28.
+ */
 public class MainActivity extends TabActivity {
 
     @Override
@@ -36,9 +41,9 @@ public class MainActivity extends TabActivity {
         tabHost.addTab(spec);//添加进tabHost
 
         //第三个Tab
-        intent = new Intent(this,SettingActivity.class);//第二个Intent用作Tab1显示的内容
-        spec = tabHost.newTabSpec("setting")//新建一个 Tab
-                .setIndicator("我的", res.getDrawable(android.R.drawable.ic_menu_help))//设置名称以及图标
+        intent = new Intent(this,SocialActivity.class);//第二个Intent用作Tab1显示的内容
+        spec = tabHost.newTabSpec("social")//新建一个 Tab
+                .setIndicator("社区", res.getDrawable(android.R.drawable.ic_menu_help))//设置名称以及图标
                 .setContent(intent);//设置显示的intent，这里的参数也可以是R.id.xxx
         tabHost.addTab(spec);//添加进tabHost
 

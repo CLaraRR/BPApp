@@ -78,11 +78,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:background="@drawable/right"
+            android:background="@color/holo_orange_light"
             android:id="@+id/right_layout"
-            android:minHeight="30dp"
+            android:minHeight="45dp"
             >
 
             <TextView
@@ -100,13 +99,13 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/right_layout">
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@drawable/touxiang"
-
                 android:id="@+id/picGirl"
                 android:layout_weight="0.53" />
 

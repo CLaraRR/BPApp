@@ -10,6 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        app:left_btn_visible="true"
+        app:left_btn_src="@drawable/back"
         app:title_visible="true"
         app:title_text="设置"
         tools:context=".SettingActivity">
@@ -35,7 +37,7 @@
                     android:padding="8dp"
                     android:textColor="#000"
                     android:text="用户名"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/usernametext"
@@ -64,7 +66,7 @@
                     android:padding="8dp"
                     android:textColor="#000"
                     android:text="用户ID"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/userIDtext"
@@ -94,7 +96,7 @@
                     android:padding="8dp"
                     android:textColor="#000"
                     android:text="密    码"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/pwdtext"
@@ -123,7 +125,7 @@
                     android:padding="8dp"
                     android:textColor="#000"
                     android:text="性    别"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
                 <RadioGroup
                     android:id="@+id/sexradioGroup"
                     android:layout_width="wrap_content"
@@ -164,7 +166,7 @@
                     android:padding="8dp"
                     android:textColor="#000"
                     android:text="出生日期"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/birthtext"
@@ -194,7 +196,7 @@
                     android:padding="8dp"
                     android:textColor="#000"
                     android:text="设备ID"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <EditText
                     android:id="@+id/deviceIDtext"
@@ -211,18 +213,18 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="30dp"
                 android:layout_below="@id/deviceRe">
 
                 <Button
                     android:id="@+id/cancel_button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
+                    android:layout_marginLeft="100dp"
                     android:text="取消"
                     android:textColor="#ffffff"
                     android:background="@color/button"/>
@@ -230,9 +232,9 @@
 
                 <Button
                     android:id="@+id/save_button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="100dp"
+                    android:layout_marginLeft="50dp"
                     android:layout_toRightOf="@id/cancel_button"
                     android:text="保存"
                     android:textColor="#ffffff"

@@ -6,4 +6,8 @@
     <color name="PaleVioletRed">#DB7093</color>
     <color name="bg_toolbar">#0760dc</color>
     <color name="button">#999999</color>
+    <color name="holo_blue_bright">#0760dc</color>
+    <color name="holo_green_light">#07dca7</color>
+    <color name="holo_orange_light">#eef991</color>
+    <color name="holo_red_light">#dc4e07</color>
 </resources>

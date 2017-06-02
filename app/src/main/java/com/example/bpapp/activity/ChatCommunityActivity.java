@@ -17,6 +17,10 @@ import com.example.bpapp.entity.Msg;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * 好友聊天Activity
+ */
 public class ChatCommunityActivity extends AppCompatActivity {
 
     private EditText inputText;
@@ -30,9 +34,6 @@ public class ChatCommunityActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        ActionBar actionBar = getSupportActionBar();
-//        actionBar.hide();
 
         setContentView(R.layout.chatcommunity_frame);
         gobackButton=(Button)findViewById(R.id.toolbar_left_btn);
@@ -75,7 +76,7 @@ public class ChatCommunityActivity extends AppCompatActivity {
         msgList.add(msg1);
         Msg msg2 = new Msg("Fine, thank you,and you?", "Edith",Msg.TYPE_SEND);
         msgList.add(msg2);
-        Msg msg3 = new Msg("I am fine, too!","Sybile", Msg.TYPE_RECEIVED);
-        msgList.add(msg3);
+//        Msg msg3 = new Msg("I am fine, too!","Sybile", Msg.TYPE_RECEIVED);
+//        msgList.add(msg3);
     }
 }

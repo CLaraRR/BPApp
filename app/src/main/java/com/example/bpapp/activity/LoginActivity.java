@@ -13,6 +13,10 @@ import android.widget.TextView;
 import com.example.bpapp.bpapp.R;
 import com.example.bpapp.service.ClientService;
 
+/**
+ * 登录Activity
+ * Created by 宁润 on 2017/5/28.
+ */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText usernameText;
     private EditText pwdText;

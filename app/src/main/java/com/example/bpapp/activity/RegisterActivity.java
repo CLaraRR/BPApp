@@ -11,6 +11,7 @@ import android.widget.RadioGroup;
 import com.example.bpapp.bpapp.R;
 
 /**
+ * 注册Activity
  * Created by 宁润 on 2017/5/28.
  */
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener,RadioGroup.OnCheckedChangeListener {

@@ -1,9 +1,14 @@
 package com.example.bpapp.activity;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Handler;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -29,14 +34,18 @@ import lecho.lib.hellocharts.model.ValueShape;
 import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.view.LineChartView;
 
-
-public class IndexActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+/**
+ * 首页Activity
+ * Created by 宁润 on 2017/5/28.
+ */
+public class IndexActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, SwipeRefreshLayout.OnRefreshListener  {
     private Spinner spinner;
     private List<String> data_list;
     private ArrayAdapter<String> arr_adapter;
     private LineChartView lineChart;
     private ListView listView;
-    private LinearLayout linearLayoutRoot;
+    private Button settingButton;
+    private SwipeRefreshLayout swipeLayout;
 
     String[] date =null;
     int[] highpressure_score=null;
@@ -58,12 +67,20 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-//        TextView textview = new TextView(this);
-//        textview.setText("这是首页");
-//        setContentView(textview);
+
         setContentView(R.layout.index_frame);
-        linearLayoutRoot=(LinearLayout) findViewById(R.id.linearlayoutroot);
         lineChart = (LineChartView)findViewById(R.id.line_chart);
+        settingButton=(Button)findViewById(R.id.toolbar_right_btn2);
+        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.id_swipe_ly);
+        swipeLayout.setOnRefreshListener(this);
+        settingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(IndexActivity.this,SettingActivity.class);
+//                intent.putExtra();
+                startActivity(intent);
+            }
+        });
         initData();
         initSpinner();
         initChart(0);
@@ -71,6 +88,24 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
 
 
     }
+
+    private Handler mHandler = new Handler()
+    {
+        public void handleMessage(android.os.Message msg)
+        {
+            switch (msg.what)
+            {
+                case 1:
+//                    mDatas.addAll(Arrays.asList("Lucene", "Canvas", "Bitmap"));
+//                    mAdapter.notifyDataSetChanged();
+                    //数据更新操作
+
+                    swipeLayout.setRefreshing(false);
+                    break;
+
+            }
+        }
+    };
 
     /**
      * 初始化页面数据
@@ -110,6 +145,20 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
      */
     private void initDataList() {
         listView=(ListView) findViewById(R.id.dataView);
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                if (firstVisibleItem == 0)
+                    swipeLayout.setEnabled(true);
+                else
+                    swipeLayout.setEnabled(false);
+            }
+        });
 //创建ArrayList对象；
         list=new ArrayList<HashMap<String,String>>();
         //将数据存放进ArrayList对象中，数据安排的结构是，ListView的一行数据对应一个HashMap对象，
@@ -134,9 +183,6 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
      * 初始化图表
      */
     private void initChart(int type) {
-
-        lineChart=(LineChartView) findViewById(R.id.line_chart);
-        
         getAxisXLables();//获取x轴的标注
         getAxisPoints(type);//获取坐标点
         initLineChart(type);//初始化折线图
@@ -157,6 +203,7 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
         arr_adapter= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_list);
         //设置样式
         arr_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         //加载适配器
         spinner.setAdapter(arr_adapter);
         //添加事件Spinner事件监听
@@ -175,30 +222,35 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
      */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        refreshUI();
         switch(position){
             //高血压
             case 0:
                 //更新图表
-//                linearLayoutRoot.removeViewAt(1);
-//                initChart(0);
+                initChart(0);
                 break;
             //低血压
             case 1:
                 //更新图表
-               // linearLayoutRoot.removeViewAt(1);
                 initChart(1);
-               // linearLayoutRoot.addView(lineChart,1);
                 break;
             //心率
             case 2:
                 //更新图表
-               // linearLayoutRoot.removeViewAt(1);
                 initChart(2);
-               // linearLayoutRoot.addView(lineChart,1);
                 break;
 
         }
 
+    }
+
+    private void refreshUI() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                lineChart.postInvalidate();
+            }
+        }).start();
     }
 
     @Override
@@ -206,11 +258,18 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
 
     }
 
+
+    @Override
+    public void onRefresh() {
+        mHandler.sendEmptyMessageDelayed(1, 2000);//刷新完成
+
+    }
     /**
      * 设置X轴的显示
      */
     private void getAxisXLables() {
         // TODO Auto-generated method stub
+        mAxisXValues.clear();
         for (int i = 0; i < date.length; i++) {
             mAxisXValues.add(new AxisValue(i).setLabel(date[i]));
         }
@@ -222,6 +281,7 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
      */
     private void getAxisPoints(int type) {
         // TODO Auto-generated method stub
+        mPointValues.clear();
         switch(type){
             case 0:
                 for (int i = 0; i < highpressure_score.length; i++) {
@@ -255,7 +315,8 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
      */
     private void initLineChart(int type) {
         // TODO Auto-generated method stub
-        lineChart=(LineChartView) findViewById(R.id.line_chart);
+
+
         Line line = new Line(mPointValues).setColor(Color.parseColor("#DB7093"));  //折线的颜色（橙色）
         List<Line> lines = new ArrayList<Line>();
         line.setShape(ValueShape.CIRCLE);//折线图上每个数据点的形状  这里是圆形 （有三种 ：ValueShape.SQUARE  ValueShape.CIRCLE  ValueShape.DIAMOND）
@@ -266,7 +327,7 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
         line.setHasLines(true);//是否用线显示。如果为false 则没有曲线只有点显示
         line.setHasPoints(true);//是否显示圆点 如果为false 则没有原点只有点显示（每个数据点都是个大的圆点）
         lines.add(line);
-        LineChartData data = new LineChartData();
+        LineChartData data =new LineChartData();
         data.setLines(lines);
 
         //坐标轴
@@ -308,7 +369,7 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
          */
         Viewport v = new Viewport(lineChart.getMaximumViewport());
         v.left = 0;
-        v.right= 10;
+        v.right= 7;
         lineChart.setCurrentViewport(v);
     }
 
