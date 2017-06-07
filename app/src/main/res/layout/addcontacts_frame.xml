@@ -57,7 +57,8 @@
             android:layout_marginRight="60dp"
             android:layout_marginEnd="60dp"
             android:id="@+id/button_firmAdd"
-            android:layout_below="@+id/userAccount" />
+            android:layout_below="@+id/userAccount"
+            android:background="@drawable/button_selector"/>
     </com.example.bpapp.view.CustomToolBar>
 </LinearLayout>
 

@@ -56,7 +56,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
                 android:id="@+id/button_sendMessage"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:background="@drawable/button_selector"/>
         </LinearLayout>
 
     </com.example.bpapp.view.CustomToolBar>

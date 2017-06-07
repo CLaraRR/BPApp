@@ -1,23 +1,26 @@
 package com.example.bpapp.activity;
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 
 import com.example.bpapp.bpapp.R;
+import com.example.bpapp.broadcast.ReceiveBroadCast;
+import com.example.bpapp.entity.Data;
+import com.example.bpapp.entity.Msglist;
+import com.example.bpapp.service.ClientService;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,14 +41,16 @@ import lecho.lib.hellocharts.view.LineChartView;
  * 首页Activity
  * Created by 宁润 on 2017/5/28.
  */
-public class IndexActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, SwipeRefreshLayout.OnRefreshListener  {
+public class IndexActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, SwipeRefreshLayout.OnRefreshListener,ReceiveBroadCast.BRInteraction {
     private Spinner spinner;
-    private List<String> data_list;
+    private List<String> optionList;
+    private List<Data> dataList;
     private ArrayAdapter<String> arr_adapter;
     private LineChartView lineChart;
     private ListView listView;
     private Button settingButton;
     private SwipeRefreshLayout swipeLayout;
+
 
     String[] date =null;
     int[] highpressure_score=null;
@@ -62,6 +67,9 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
     String[] heartbeat_scoreStr=null;
     ArrayList<HashMap<String,String>> list=null;
     HashMap<String,String> map=null;
+
+    private ReceiveBroadCast receiveBroadCast;
+    private ClientService clientService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,12 +89,28 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
                 startActivity(intent);
             }
         });
-        initData();
-        initSpinner();
-        initChart(0);
-        initDataList();
+
+        clientService=ClientService.getInstance();
+        dataList=new ArrayList<>();
+        dataList.addAll(Msglist.getDataList());//一开始数据是从登录后获得的初始数据
+
+        receiveBroadCast=new ReceiveBroadCast();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("DH");    //只有持有相同的action的接受者才能接收此广播
+        registerReceiver(receiveBroadCast, filter);
+        receiveBroadCast.setBRInteractionListener(this);
 
 
+        initSpinner();//初始化下拉列表视图
+        initDataView();//初始化数据显示视图，包括折线图和表格
+
+
+    }
+
+    private void initDataView() {
+        initData();//初始化数据
+        initChart(0);//初始化折线图，默认显示高血压的折线图
+        initDataList();//初始化表格
     }
 
     private Handler mHandler = new Handler()
@@ -99,7 +123,7 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
 //                    mDatas.addAll(Arrays.asList("Lucene", "Canvas", "Bitmap"));
 //                    mAdapter.notifyDataSetChanged();
                     //数据更新操作
-
+                    initDataView();//更新数据显示视图
                     swipeLayout.setRefreshing(false);
                     break;
 
@@ -111,11 +135,21 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
      * 初始化页面数据
      */
     private void initData() {
-        String[] date2={"10-22","11-22","12-22","1-22","6-22","5-23","5-22","6-22","5-23","5-22"};
-        int[] highpressure_score2={50,42,90,33,10,74,22,18,79,20};
-        int[] lowpressure_score2={40,32,80,23,5,64,12,5,50,12};
-        int[] heartbeat_score3={100,80,85,70,70,74,75,80,85,80};
-        int datalen=date2.length;
+
+        System.out.println("get data success!");
+        for(Data each:dataList){
+            System.out.println(each.getHighscore()+" "+each.getLowscore()+" "+each.getHeartbeat()+" "+each.getDatatime());
+        }
+
+        int datalen=dataList.size();
+        date=null;
+        highpressure_score=null;
+        lowpressure_score=null;
+        heartbeat_score=null;
+        highpressure_scoreStr=null;
+        lowpressure_scoreStr=null;
+        heartbeat_scoreStr=null;
+
         date=new String[datalen];
         highpressure_score=new int[datalen];
         lowpressure_score=new int[datalen];
@@ -123,20 +157,17 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
         highpressure_scoreStr=new String[datalen];
         lowpressure_scoreStr=new String[datalen];
         heartbeat_scoreStr=new String[datalen];
-        
-        date = date2;//X轴的标注
-        highpressure_score= highpressure_score2;//高血压数据点
-        lowpressure_score= lowpressure_score2;//低血压数据点
-        heartbeat_score= heartbeat_score3;//心率数据点
 
-        for(int i=0;i<date.length;i++){
+        for(int i=0;i<datalen;i++){
+            date[i]=dataList.get(i).getDatatime();//X轴的日期
+            highpressure_score[i]=dataList.get(i).getHighscore();//高血压数据点
+            lowpressure_score[i]=dataList.get(i).getLowscore();//低血压数据点
+            heartbeat_score[i]=dataList.get(i).getHeartbeat();//心率数据点
+
             highpressure_scoreStr[i]=String.valueOf(highpressure_score[i]);
             lowpressure_scoreStr[i]=String.valueOf(lowpressure_score[i]);
             heartbeat_scoreStr[i]=String.valueOf(heartbeat_score[i]);
         }
-        
-
-
 
     }
 
@@ -194,13 +225,13 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
     private void initSpinner() {
         spinner = (Spinner) findViewById(R.id.spinner);
         //数据
-        data_list = new ArrayList<String>();
-        data_list.add("高血压");
-        data_list.add("低血压");
-        data_list.add("心率");
+        optionList = new ArrayList<String>();
+        optionList.add("高血压");
+        optionList.add("低血压");
+        optionList.add("心率");
 
         //适配器
-        arr_adapter= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_list);
+        arr_adapter= new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, optionList);
         //设置样式
         arr_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
@@ -261,6 +292,10 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
 
     @Override
     public void onRefresh() {
+        String message=clientService.refreshData();
+        List<Data> list=clientService.parseData(message);
+        dataList.addAll(list);
+
         mHandler.sendEmptyMessageDelayed(1, 2000);//刷新完成
 
     }
@@ -315,7 +350,6 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
      */
     private void initLineChart(int type) {
         // TODO Auto-generated method stub
-
 
         Line line = new Line(mPointValues).setColor(Color.parseColor("#DB7093"));  //折线的颜色（橙色）
         List<Line> lines = new ArrayList<Line>();
@@ -374,5 +408,17 @@ public class IndexActivity extends AppCompatActivity implements AdapterView.OnIt
     }
 
 
-
+    @Override
+    public void setMsg(String content) {
+        if(content!=null){
+            System.out.println("data content:"+content);
+            List<Data> list=clientService.parseData(content);
+            dataList.addAll(list);
+//            for(int i=0;i<dataList.size();i++){
+//                System.out.println(dataList.get(i).getHighscore()+" "+dataList.get(i).getLowscore()+" "
+//                +dataList.get(i).getHeartbeat()+" "+dataList.get(i).getDatatime());
+//            }
+            initDataView();//更新数据显示视图
+        }
+    }
 }

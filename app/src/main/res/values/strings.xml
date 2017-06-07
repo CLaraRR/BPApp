@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">血压小助手</string>
     <string name="save">保存</string>
-    <string name="title_activity_edit_social_msg">EditSocialMsgActivity</string>
+    <drawable name="clr_normal">#a3acb7</drawable>
+    <drawable name="clr_pressed">#7b7d86</drawable>
 </resources>

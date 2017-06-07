@@ -11,7 +11,8 @@ import android.widget.TextView;
 
 
 import com.example.bpapp.bpapp.R;
-import com.example.bpapp.entity.Msg;
+import com.example.bpapp.entity.ChatMsg;
+import com.example.bpapp.entity.SocialMsg;
 
 import java.util.List;
 
@@ -19,17 +20,17 @@ import java.util.List;
  * Created by chenq on 2017/5/30.
  */
 
-public class MsgAdapter extends ArrayAdapter<Msg> {
+public class ChatMsgAdapter extends ArrayAdapter<ChatMsg> {
     private int resourceId;
 
-    public MsgAdapter(Context context, int textViewResourceId, List<Msg> objects) {
+    public ChatMsgAdapter(Context context, int textViewResourceId, List<ChatMsg> objects) {
         super(context, textViewResourceId, objects);
         resourceId = textViewResourceId;
     }
 
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        Msg msg = getItem(position);
+        ChatMsg chatMsg = getItem(position);
         View view;
         ViewHolder viewHolder;
         if(convertView == null) {
@@ -48,21 +49,21 @@ public class MsgAdapter extends ArrayAdapter<Msg> {
             view = convertView;
             viewHolder = (ViewHolder) view.getTag();
         }
-        if(msg.getType() == Msg.TYPE_RECEIVED) {
+        if(chatMsg.getType() == ChatMsg.TYPE_RECEIVED) {
             viewHolder.leftLayout.setVisibility(View.VISIBLE);
             viewHolder.head1.setVisibility(View.VISIBLE);
             viewHolder.rightLayout.setVisibility(View.GONE);
             viewHolder.head2.setVisibility(View.GONE);
-            viewHolder.leftMsg.setText(msg.getContent());
-            viewHolder.MsgFrom.setText(msg.getUserName());
+            viewHolder.leftMsg.setText(chatMsg.getContent());
+            viewHolder.MsgFrom.setText(chatMsg.getUserName());
             viewHolder.Myself.setText("");
-        } else if(msg.getType() == Msg.TYPE_SEND) {
+        } else if(chatMsg.getType() == ChatMsg.TYPE_SEND) {
             viewHolder.rightLayout.setVisibility(View.VISIBLE);
             viewHolder.head2.setVisibility(View.VISIBLE);
             viewHolder.leftLayout.setVisibility(View.GONE);
             viewHolder.head1.setVisibility(View.GONE);
-            viewHolder.rightMsg.setText(msg.getContent());
-            viewHolder.Myself.setText(msg.getUserName());
+            viewHolder.rightMsg.setText(chatMsg.getContent());
+            viewHolder.Myself.setText(chatMsg.getUserName());
             viewHolder.MsgFrom.setText("");
         }
         return view;

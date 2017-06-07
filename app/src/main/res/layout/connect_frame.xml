@@ -54,8 +54,8 @@
                 android:layout_below="@+id/porttext"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
-                android:text="连接"
-                android:background="@color/button"/>
+                android:background="@drawable/button_selector"
+                android:text="连接" />
 
         </RelativeLayout>
     </com.example.bpapp.view.CustomToolBar>

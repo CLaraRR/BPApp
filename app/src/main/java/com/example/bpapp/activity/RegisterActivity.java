@@ -1,14 +1,19 @@
 package com.example.bpapp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.bpapp.bpapp.R;
+import com.example.bpapp.service.ClientService;
 
 /**
  * 注册Activity
@@ -25,7 +30,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private RadioButton femaleRadio;
     private Button registerButton;
     private Button cancleButton;
-    private String sex;
+
+    private int sex; //1--man;0--female
 
     private Button gobackButton;
 
@@ -54,13 +60,32 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         sexRadio.setOnCheckedChangeListener(this);
     }
 
+    private Handler mHandler = new Handler() {
+        public void handleMessage (Message msg) {//此方法在ui线程运行
+            String str=msg.obj.toString();
+            System.out.println(str);
+
+            if(str.startsWith("+OKREGISTER")){
+                //登陆成功跳转到首页
+                Toast.makeText(RegisterActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+//                intent.putExtra();
+                startActivity(intent);
+
+            }else if(str.startsWith("+ERRORUSERNAM")){
+                Toast.makeText(RegisterActivity.this,"用户名已经存在",Toast.LENGTH_LONG).show();
+            }else {
+                Toast.makeText(RegisterActivity.this,"服务器忙，请稍后操作",Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         if(maleRadio.getId()==checkedId){
-            this.sex="男";
+            this.sex=1;
         }
         else if(femaleRadio.getId()==checkedId){
-            this.sex="女";
+            this.sex=0;
         }
     }
 
@@ -74,7 +99,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 String birth=birthText.getText().toString();
                 //注册动作。。。
                 //add your code here
-
+                if(pwd.equals(pwdcomfirm)){
+                    register(username,pwd,sex,birth);
+                }else{
+                    Toast.makeText(RegisterActivity.this,"输入密码不一致",Toast.LENGTH_SHORT).show();
+                    passwordText.setText("");
+                    confirmText.setText("");
+                }
 
                 break;
             case R.id.cancel_button:
@@ -89,5 +120,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 finish();
                 break;
         }
+    }
+
+    private void register(final String username, final String pwd, final int pwdcomfirm, final String birth){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                ClientService clientService= ClientService.getInstance();
+                String  resString=clientService.register(username,pwd,pwdcomfirm,birth);
+                Message msg=new Message();
+                msg.obj=resString;
+                mHandler.sendMessage(msg);
+            }
+        }).start();
     }
 }

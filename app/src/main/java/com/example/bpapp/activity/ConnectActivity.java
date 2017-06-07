@@ -30,6 +30,8 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
     private EditText porttext;
     private Button connectButton;
     public Boolean isConnect;
+    public String ip;
+    public String port;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -45,6 +47,10 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
         public void handleMessage (Message msg) {//此方法在ui线程运行  
             if(msg.obj==TRUE){
                 Intent intent=new Intent(ConnectActivity.this,LoginActivity.class);
+                Bundle data=new Bundle();
+                data.putString("ip",ip);
+                data.putString("port",port);
+                intent.putExtras(data);
                 startActivity(intent);
             }else{
             }
@@ -63,11 +69,8 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.connect_button:
-                String ip=iptext.getText().toString();
-                String port=porttext.getText().toString();
-//                String ip="49.123.92.128";
-//                int port=8000;
-                System.out.println("###"+ip+" "+port);
+                ip=iptext.getText().toString();
+                port=porttext.getText().toString();
                 connectServer(ip,Integer.parseInt(port.trim()));//连接服务器
                 
                 break;
@@ -84,6 +87,11 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
 
                 try {
                     Boolean isConnect = clientService.start();
+                    if(!isConnect){
+                        System.out.println("connect fail!");
+                    }else{
+                        System.out.println("connect success!");
+                    }
                     Message msg=new Message();
                     msg.obj=isConnect;
                     mHandler.sendMessage(msg);

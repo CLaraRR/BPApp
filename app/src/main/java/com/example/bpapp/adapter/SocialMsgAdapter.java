@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 
 import com.example.bpapp.bpapp.R;
-import com.example.bpapp.entity.Contacts;
+import com.example.bpapp.entity.SocialMsg;
 
 import java.util.List;
 
@@ -18,15 +18,15 @@ import java.util.List;
  * Created by chenq on 2017/5/29.
  */
 
-public class ContactsAdapter extends ArrayAdapter<Contacts> {
+public class SocialMsgAdapter extends ArrayAdapter<SocialMsg> {
     private int resourceId;
-    public ContactsAdapter(Context context, int resource, List<Contacts>objects) {
+    public SocialMsgAdapter(Context context, int resource, List<SocialMsg>objects) {
         super(context, resource,objects);
         resourceId=resource;
     }
 
     public View getView(int postion, View convertView, ViewGroup parent){
-        Contacts contacts=getItem(postion);
+        SocialMsg socialMsg=getItem(postion);
         View view;
         ViewHolder viewHolder;
 
@@ -43,10 +43,10 @@ public class ContactsAdapter extends ArrayAdapter<Contacts> {
             view=convertView;
             viewHolder=(ViewHolder)view.getTag();
         }
-        viewHolder.touxiang.setImageResource(contacts.getImageId());
-        viewHolder.time.setText(contacts.getTime().toString());
-        viewHolder.digest.setText(contacts.getDigest());
-        viewHolder.contact.setText(contacts.getName());
+        viewHolder.touxiang.setImageResource(socialMsg.getImageId());
+        viewHolder.time.setText(socialMsg.getTime().toString());
+        viewHolder.digest.setText(socialMsg.getContent());
+        viewHolder.contact.setText(socialMsg.getName());
         return view;
     }
 

@@ -227,7 +227,7 @@
                     android:layout_marginLeft="100dp"
                     android:text="取消"
                     android:textColor="#ffffff"
-                    android:background="@color/button"/>
+                    android:background="@drawable/button_selector"/>
 
 
                 <Button
@@ -238,7 +238,7 @@
                     android:layout_toRightOf="@id/cancel_button"
                     android:text="保存"
                     android:textColor="#ffffff"
-                    android:background="@color/button"/>
+                    android:background="@drawable/button_selector"/>
             </LinearLayout>
         </RelativeLayout>
 

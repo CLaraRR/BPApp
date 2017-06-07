@@ -3,6 +3,8 @@ package com.example.bpapp.service;
 import com.example.bpapp.service.ClientService;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 /**
@@ -36,15 +38,19 @@ public class Test {
         System.out.println("###please enter data:");
 
 
-        String data=in.nextLine();
-        String message=clientService.send(data);//发送的数据（按照协议来封装数据），返回结果
-        System.out.println(message);
-
-        System.out.println("$$$please enter data:");
-
-
-        data=in.nextLine();
-        message=ClientService.getInstance().send(data);//发送的数据（按照协议来封装数据），返回结果
+//        String data=in.nextLine();
+//        String message=clientService.send(data);//发送的数据（按照协议来封装数据），返回结果
+//        System.out.println(message);
+//
+//        System.out.println("$$$please enter data:");
+//
+//
+//        data=in.nextLine();
+        Date now = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss");
+//
+        String dtStr = sdf.format(now);
+        String  message=clientService.sendMessageToPublic("topublic", dtStr);
         System.out.println(message);
 
     }
